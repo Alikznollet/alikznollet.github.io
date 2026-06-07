@@ -1,4 +1,6 @@
 ---
+import Badge from './Badge.astro';
+
 interface Props {
 	title: string;
 	description: string;
@@ -12,13 +14,15 @@ const { title, description, url, tags = [] } = Astro.props;
 <div class="project-card">
 	<a href={url} class="card-link" aria-label={`View details for ${title}`}>
 		<div class="content">
-			<h3>{title}</h3>
+			<div class="header">
+				<h3>{title}</h3>
+				{tags.length > 0 && (
+					<div class="tags">
+						{tags.map(tag => <Badge text={tag} />)}
+					</div>
+				)}
+			</div>
 			<p>{description}</p>
-			{tags.length > 0 && (
-				<div class="tags">
-					{tags.map(tag => <span class="tag">{tag}</span>)}
-				</div>
-			)}
 		</div>
 	</a>
 </div>
@@ -44,15 +48,23 @@ const { title, description, url, tags = [] } = Astro.props;
 		color: inherit;
 	}
 
-	h3 {
-		margin-top: 0;
+	.header {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
 		margin-bottom: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	h3 {
+		margin: 0;
 		color: #ffffff;
+		line-height: 1.2;
 	}
 
 	p {
 		color: var(--text-dim);
-		margin-bottom: 1rem;
+		margin: 0;
 		font-size: 0.95rem;
 	}
 
@@ -60,13 +72,5 @@ const { title, description, url, tags = [] } = Astro.props;
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
-	}
-
-	.tag {
-		font-size: 0.75rem;
-		background-color: rgba(187, 134, 252, 0.1);
-		color: var(--accent);
-		padding: 0.2rem 0.5rem;
-		border-radius: 4px;
 	}
 </style>

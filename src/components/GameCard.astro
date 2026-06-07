@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import Badge from './Badge.astro';
 
 interface Props {
 	title: string;
@@ -26,7 +27,7 @@ const { title, description, url, coverImage, genre } = Astro.props;
 		<div class="content">
 			<div class="header">
 				<h3>{title}</h3>
-				{genre && <span class="genre">{genre}</span>}
+				{genre && <Badge text={genre} />}
 			</div>
 			<p>{description}</p>
 		</div>
@@ -92,20 +93,15 @@ const { title, description, url, coverImage, genre } = Astro.props;
 
 	.header {
 		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
+		align-items: center;
+		gap: 0.75rem;
 		margin-bottom: 0.5rem;
 	}
 
 	h3 {
 		margin: 0;
 		color: #ffffff;
-	}
-
-	.genre {
-		font-size: 0.75rem;
-		color: var(--text-dim);
-		font-style: italic;
+		line-height: 1.2;
 	}
 
 	p {
