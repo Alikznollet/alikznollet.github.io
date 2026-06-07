@@ -1,9 +1,13 @@
 ---
 title: "Storm Guardians"
 description: "A 2D tower defense game made for the Brackeys 2024.2 game jam."
-genre: "Tower Defense"
+genres: ["Tower Defense"]
 coverImage: "../../assets/storm_guardians.png"
 itchUrl: "https://alikz.itch.io/storm-guardians"
+gameJam:
+  name: "Brackeys 2024.2"
+  placement: "#148"
+  url: "https://itch.io/jam/brackeys-12/rate/2972178"
 priority: 1
 ---
 

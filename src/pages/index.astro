@@ -42,7 +42,8 @@ const sortedProjects = projectEntries.sort((a, b) =>
 				<GameCard 
 					title={game.data.title}
 					description={game.data.description}
-					genre={game.data.genre}
+					genres={game.data.genres}
+					gameJam={game.data.gameJam}
 					coverImage={game.data.coverImage}
 					url={`/games/${game.id}`}
 				/>

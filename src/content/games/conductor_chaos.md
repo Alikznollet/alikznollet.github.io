@@ -1,9 +1,13 @@
 ---
 title: "Conductor Chaos"
 description: "A top down puzzle game where you have to bring passengers from station A to B under pressure. Made for the GMTK 2025 game jam."
-genre: "Puzzle"
+genres: ["Puzzle"]
 coverImage: "../../assets/conductor_chaos.png"
 itchUrl: "https://alikz.itch.io/conductor-chaos"
+gameJam:
+  name: "GMTK 2025"
+  placement: "#1067"
+  url: "https://itch.io/jam/gmtk-2025/rate/3779569"
 priority: 0
 ---
 

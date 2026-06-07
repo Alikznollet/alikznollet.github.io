@@ -32,8 +32,18 @@ const { Content } = await render(entry);
 			</div>
 			<div class="meta">
 				<h1>{entry.data.title}</h1>
-				{entry.data.genre && <Badge text={entry.data.genre} />}
+				<div class="badges">
+					{entry.data.genres.map(genre => <Badge text={genre} />)}
+				</div>
 			</div>
+			{entry.data.gameJam && (
+				<div class="jam-info">
+					<a href={entry.data.gameJam.url} target="_blank" rel="noopener noreferrer" class="jam-card">
+						<span class="jam-label">{entry.data.gameJam.name || 'Game Jam Result'}</span>
+						<span class="jam-placement">{entry.data.gameJam.placement}</span>
+					</a>
+				</div>
+			)}
 			<p class="lead-desc">{entry.data.description}</p>
 		</header>
 
@@ -107,6 +117,46 @@ const { Content } = await render(entry);
 		align-items: center;
 		margin-bottom: 1rem;
 		gap: 1rem;
+	}
+
+	.badges {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.jam-info {
+		margin-bottom: 2rem;
+	}
+
+	.jam-card {
+		display: inline-flex;
+		flex-direction: column;
+		background: var(--accent);
+		color: #000;
+		padding: 0.75rem 1.5rem;
+		border-radius: 12px;
+		text-decoration: none;
+		font-weight: bold;
+		line-height: 1.2;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+	}
+
+	.jam-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+	}
+
+	.jam-label {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		opacity: 0.8;
+		letter-spacing: 0.5px;
+	}
+
+	.jam-placement {
+		font-size: 1.25rem;
 	}
 
 	.meta h1 {

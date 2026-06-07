@@ -20,11 +20,16 @@ const games = defineCollection({
 	schema: ({ image }) => z.object({
 		title: z.string(),
 		description: z.string(),
-		genre: z.string().optional(),
+		genres: z.array(z.string()).default([]),
 		coverImage: image().optional(),
 		itchUrl: z.string().optional(),
 		steamUrl: z.string().optional(),
-		priority: z.int(),
+		gameJam: z.object({
+			placement: z.string(),
+			url: z.string(),
+			name: z.string().optional(),
+		}).optional(),
+		priority: z.number().default(0),
 	}),
 });
 
