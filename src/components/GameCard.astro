@@ -27,7 +27,6 @@ const { title, description, url, imageUrl, genre } = Astro.props;
 				{genre && <span class="genre">{genre}</span>}
 			</div>
 			<p>{description}</p>
-			<span class="read-more">Read Story →</span>
 		</div>
 	</a>
 </div>
@@ -108,15 +107,9 @@ const { title, description, url, imageUrl, genre } = Astro.props;
 	}
 
 	p {
-		margin: 0 0 0.5rem 0;
+		margin: 0;
 		color: var(--text-dim);
 		font-size: 0.95rem;
-	}
-
-	.read-more {
-		font-size: 0.8rem;
-		color: var(--accent);
-		font-weight: bold;
 	}
 
 	@media (max-width: 600px) {
