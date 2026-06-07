@@ -62,6 +62,7 @@ const sortedProjects = projectEntries.sort((a, b) =>
 					description={project.data.description}
 					tags={project.data.tags}
 					url={`/projects/${project.id}`}
+					githubUrl={project.data.githubUrl}
 				/>
 			))
 		) : (

@@ -13,4 +13,4 @@ socials:
   - platform: "Email"
     url: "mailto:alexanderacj13@gmail.com"
 ---
-Hey! I'm Alexander and I go by Alikz on the internet. I create games using Godot and develop projects that make my life and the lives of others easier.
+Hey! I'm Alexander, though you'll usually see me as Alikz online. I'm a developer who loves creating games in Godot and building open-source tools that make the development process smoother for everyone.
