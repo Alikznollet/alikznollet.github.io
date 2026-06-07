@@ -7,6 +7,11 @@ const profile = defineCollection({
 		name: z.string(),
 		description: z.string().optional(),
 		profileImage: image().optional(),
+		socials: z.array(z.object({
+			platform: z.string(),
+			url: z.string(),
+			icon: z.string().optional(),
+		})).optional(),
 	}),
 });
 

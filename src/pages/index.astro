@@ -12,7 +12,7 @@ if (!profileEntry) {
 	throw new Error('Profile entry "me" not found in src/content/profile/me.md');
 }
 
-const { name, profileImage } = profileEntry.data;
+const { name, profileImage, socials } = profileEntry.data;
 const { Content: ProfileContent } = await render(profileEntry);
 
 // Fetch content from Collections
@@ -30,7 +30,7 @@ const sortedProjects = projectEntries.sort((a, b) =>
 
 <Layout title={`${name} | Portfolio`}>
 	<section>
-		<Profile name={name} imageUrl={profileImage}>
+		<Profile name={name} imageUrl={profileImage} socials={socials}>
 			<ProfileContent />
 		</Profile>
 	</section>
