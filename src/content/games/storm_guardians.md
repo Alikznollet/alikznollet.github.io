@@ -4,6 +4,7 @@ description: "A 2D tower defense game made for the Brackeys 2024.2 game jam."
 genre: "Tower Defense"
 coverImage: "../../assets/storm_guardians.png"
 itchUrl: "https://alikz.itch.io/storm-guardians"
+priority: 1
 ---
 
 ## My First Game (Jam)

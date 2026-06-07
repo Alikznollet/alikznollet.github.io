@@ -21,10 +21,10 @@ const projectEntries = await getCollection('projects');
 
 // Sort by pubDate if available
 const sortedGames = gameEntries.sort((a, b) => 
-	(b.data.pubDate?.getTime() || 0) - (a.data.pubDate?.getTime() || 0)
+	(b.data.priority || 0) - (a.data.priority || 0)
 );
 const sortedProjects = projectEntries.sort((a, b) => 
-	(b.data.pubDate?.getTime() || 0) - (a.data.pubDate?.getTime() || 0)
+	(b.data.priority || 0) - (a.data.priority || 0)
 );
 ---
 

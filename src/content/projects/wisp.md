@@ -3,6 +3,7 @@ title: "Wisp"
 description: "A lightweight CLI tool and editor plugin for managing Godot (private) addons via git."
 tags: ["Tool", "CLI", "Go"]
 githubUrl: "https://github.com/Alikznollet/godot-wisp"
+priority: 1
 ---
 
 Everyone in game development *dreads* git submodules. **Wisp** fixes that while staying true to the nature of Godot addons.

@@ -24,7 +24,7 @@ const games = defineCollection({
 		coverImage: image().optional(),
 		itchUrl: z.string().optional(),
 		steamUrl: z.string().optional(),
-		pubDate: z.date().optional(),
+		priority: z.int(),
 	}),
 });
 
@@ -37,7 +37,7 @@ const projects = defineCollection({
 		coverImage: image().optional(),
 		githubUrl: z.string().optional(),
 		liveUrl: z.string().optional(),
-		pubDate: z.date().optional(),
+		priority: z.int(),
 	}),
 });
 
