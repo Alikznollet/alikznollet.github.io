@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+import GitHubCard from '../../components/GitHubCard.astro';
 
 export async function getStaticPaths() {
 	const projectEntries = await getCollection('projects');
@@ -32,15 +33,28 @@ const { Content } = await render(entry);
 			</div>
 			<p class="lead-desc">{entry.data.description}</p>
 			
-			<div class="links">
-				{entry.data.githubUrl && <a href={entry.data.githubUrl} class="link-btn github">GitHub</a>}
-				{entry.data.liveUrl && <a href={entry.data.liveUrl} class="link-btn live">Live Demo</a>}
-			</div>
+			{entry.data.liveUrl && (
+				<div class="top-actions">
+					<a href={entry.data.liveUrl} target="_blank" rel="noopener noreferrer" class="live-demo-link">
+						View Live Demo →
+					</a>
+				</div>
+			)}
 		</header>
 
 		<div class="content-body">
 			<Content />
 		</div>
+
+		{(entry.data.githubUrl) && (
+			<footer class="project-footer">
+				<hr class="separator" />
+				<div class="footer-content">
+					<h3>Interested in the source?</h3>
+					<GitHubCard url={entry.data.githubUrl} />
+				</div>
+			</footer>
+		)}
 	</article>
 </Layout>
 
@@ -107,40 +121,25 @@ const { Content } = await render(entry);
 	.lead-desc {
 		font-size: 1.25rem;
 		color: var(--text-dim);
-		margin: 0 0 1.5rem 0;
+		margin: 0 0 1rem 0;
 	}
 
-	.links {
-		display: flex;
-		gap: 1rem;
+	.top-actions {
+		margin-top: 1rem;
 	}
 
-	.link-btn {
-		padding: 0.5rem 1rem;
-		border-radius: 6px;
-		font-weight: bold;
-		font-size: 0.9rem;
-		transition: opacity 0.2s;
-	}
-
-	.link-btn:hover {
-		opacity: 0.8;
-		text-decoration: none;
-	}
-
-	.github {
-		background-color: #333;
-		color: #fff;
-	}
-
-	.live {
-		background-color: var(--accent);
-		color: var(--bg-color);
+	.live-demo-link {
+		display: inline-block;
+		font-weight: 600;
+		color: var(--accent);
+		font-size: 1rem;
+		text-decoration: underline;
 	}
 
 	.content-body {
 		font-size: 1.1rem;
 		color: var(--text-color);
+		line-height: 1.7;
 	}
 
 	/* Markdown styles */
@@ -159,6 +158,23 @@ const { Content } = await render(entry);
 		max-width: 100%;
 		border-radius: 8px;
 		border: 1px solid var(--card-border);
+		margin: 2rem 0;
+	}
+
+	.project-footer {
+		margin-top: 4rem;
+	}
+
+	.separator {
+		border: 0;
+		border-top: 1px solid var(--card-border);
+		margin-bottom: 3rem;
+	}
+
+	.footer-content h3 {
+		margin-top: 0;
+		margin-bottom: 1.5rem;
+		font-size: 1.5rem;
 	}
 
 	@media (max-width: 600px) {
