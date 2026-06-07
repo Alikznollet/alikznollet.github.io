@@ -1,0 +1,154 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const gameEntries = await getCollection('games');
+	return gameEntries.map(entry => ({
+		params: { slug: entry.id }, props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={`${entry.data.title} | Game Details`}>
+	<a href="/" class="back-link">← Back to Home</a>
+	
+	<article class="game-detail">
+		<header>
+			<div class="visual-header">
+				{entry.data.imageUrl ? (
+					<img src={entry.data.imageUrl} alt={entry.data.title} class="hero-image" />
+				) : (
+					<div class="hero-placeholder">
+						<span>{entry.data.title}</span>
+					</div>
+				)}
+			</div>
+			<div class="meta">
+				<h1>{entry.data.title}</h1>
+				{entry.data.genre && <span class="genre-tag">{entry.data.genre}</span>}
+			</div>
+			<p class="lead-desc">{entry.data.description}</p>
+		</header>
+
+		<div class="content-body">
+			<Content />
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.back-link {
+		display: inline-block;
+		margin-bottom: 2rem;
+		font-size: 0.9rem;
+		color: var(--text-dim);
+	}
+
+	.back-link:hover {
+		color: var(--accent);
+	}
+
+	.game-detail header {
+		margin-bottom: 3rem;
+	}
+
+	.visual-header {
+		width: 100%;
+		height: 300px;
+		background-color: #000;
+		border-radius: 12px;
+		overflow: hidden;
+		border: 1px solid var(--card-border);
+		margin-bottom: 2rem;
+	}
+
+	.hero-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.hero-placeholder {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--text-dim);
+		font-size: 1.5rem;
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+	}
+
+	.meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+	}
+
+	.meta h1 {
+		margin: 0;
+		font-size: 3rem;
+	}
+
+	.genre-tag {
+		background-color: var(--accent);
+		color: var(--bg-color);
+		padding: 0.25rem 0.75rem;
+		border-radius: 20px;
+		font-size: 0.8rem;
+		font-weight: bold;
+	}
+
+	.lead-desc {
+		font-size: 1.25rem;
+		color: var(--text-dim);
+		margin: 0;
+	}
+
+	.content-body {
+		font-size: 1.1rem;
+		color: var(--text-color);
+	}
+
+	/* Markdown styles */
+	.content-body :global(h2) {
+		font-size: 1.8rem;
+		margin-top: 3rem;
+		border-bottom: 1px solid var(--card-border);
+		padding-bottom: 0.5rem;
+	}
+
+	.content-body :global(p) {
+		margin-bottom: 1.5rem;
+	}
+
+	.content-body :global(ul) {
+		margin-bottom: 1.5rem;
+		padding-left: 1.5rem;
+	}
+
+	.content-body :global(li) {
+		margin-bottom: 0.5rem;
+	}
+
+	@media (max-width: 600px) {
+		.meta {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
+		.meta h1 {
+			font-size: 2rem;
+		}
+		.visual-header {
+			height: 200px;
+		}
+	}
+</style>

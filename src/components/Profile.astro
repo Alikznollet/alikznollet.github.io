@@ -1,0 +1,77 @@
+---
+interface Props {
+	name: string;
+	description: string;
+	imageUrl?: string;
+}
+
+const { name, description, imageUrl } = Astro.props;
+---
+
+<div class="profile">
+	<div class="avatar-container">
+		{imageUrl ? (
+			<img src={imageUrl} alt={name} class="avatar" />
+		) : (
+			<div class="avatar-placeholder"></div>
+		)}
+	</div>
+	<div class="info">
+		<h1>{name}</h1>
+		<p class="description">{description}</p>
+	</div>
+</div>
+
+<style>
+	.profile {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		margin-bottom: 4rem;
+	}
+
+	.avatar-container {
+		flex-shrink: 0;
+	}
+
+	.avatar, .avatar-placeholder {
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		object-fit: cover;
+		background-color: var(--card-bg);
+		border: 2px solid var(--card-border);
+	}
+
+	.avatar-placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+	}
+
+	.avatar-placeholder::after {
+		content: '👤';
+		font-size: 3rem;
+	}
+
+	.info h1 {
+		margin: 0 0 0.5rem 0;
+		font-size: 2.5rem;
+	}
+
+	.description {
+		font-size: 1.1rem;
+		color: var(--text-dim);
+		max-width: 500px;
+		margin: 0;
+	}
+
+	@media (max-width: 600px) {
+		.profile {
+			flex-direction: column;
+			text-align: center;
+			gap: 1.5rem;
+		}
+	}
+</style>

@@ -1,12 +1,87 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import Profile from '../components/Profile.astro';
+import GameCard from '../components/GameCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const name = "Alex";
+const description = "Game Developer and Software Engineer. I build low-level systems, interactive tools, and immersive digital experiences.";
+
+// Fetch games from Content Collection
+const gameEntries = await getCollection('games');
+
+const projects = [
+	{
+		title: "Custom Voxel Renderer",
+		description: "A high-performance C++ voxel engine utilizing sparse octrees and compute shaders for real-time lighting.",
+		tags: ["C++", "OpenGL", "Graphics"],
+		url: "#"
+	},
+	{
+		title: "Procedural Terrain Generator",
+		description: "An Astro-based web tool for generating and exporting heightmaps using Simplex noise.",
+		tags: ["Astro", "TypeScript", "Algorithms"],
+		url: "#"
+	},
+	{
+		title: "AssetCrunch",
+		description: "A CLI tool for batch optimizing game assets (textures, models) for web deployment.",
+		tags: ["Tool", "CLI", "Node.js"],
+		url: "#"
+	},
+	{
+		title: "LogView",
+		description: "A lightweight terminal-based log visualizer for real-time debugging of networked games.",
+		tags: ["Tool", "Rust", "Terminal"],
+		url: "#"
+	},
+	{
+		title: "GridSnap",
+		description: "A simple library for implementing grid-based movement in any JavaScript engine.",
+		tags: ["Library", "JavaScript"],
+		url: "#"
+	}
+];
 ---
 
-<Layout>
-	<Welcome />
-	TEST
+<Layout title={`${name} | Portfolio`}>
+	<section>
+		<Profile name={name} description={description} />
+	</section>
+
+	<section id="games">
+		<h2 class="section-title">Games</h2>
+		{gameEntries.map(game => (
+			<GameCard 
+				title={game.data.title}
+				description={game.data.description}
+				genre={game.data.genre}
+				imageUrl={game.data.imageUrl}
+				url={`/games/${game.id}`}
+			/>
+		))}
+	</section>
+
+	<section id="projects">
+		<h2 class="section-title">Projects & Tools</h2>
+		{projects.map(project => (
+			<ProjectCard {...project} />
+		))}
+	</section>
+
+	<footer>
+		<p>© {new Date().getFullYear()} {name} — Built with Astro</p>
+	</footer>
 </Layout>
+
+<style>
+	footer {
+		margin-top: 4rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--card-border);
+		color: var(--text-dim);
+		font-size: 0.9rem;
+		text-align: center;
+	}
+</style>

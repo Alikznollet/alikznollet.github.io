@@ -1,0 +1,131 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	url?: string;
+	imageUrl?: string;
+	genre?: string;
+}
+
+const { title, description, url, imageUrl, genre } = Astro.props;
+---
+
+<div class="game-card">
+	<a href={url} class="card-link" aria-label={`View details for ${title}`}>
+		<div class="visual-container">
+			{imageUrl ? (
+				<img src={imageUrl} alt={title} class="game-image" />
+			) : (
+				<div class="game-placeholder">
+					<span>Gameplay Preview</span>
+				</div>
+			)}
+		</div>
+		<div class="content">
+			<div class="header">
+				<h3>{title}</h3>
+				{genre && <span class="genre">{genre}</span>}
+			</div>
+			<p>{description}</p>
+			<span class="read-more">Read Story →</span>
+		</div>
+	</a>
+</div>
+
+<style>
+	.game-card {
+		position: relative;
+		border-radius: 8px;
+		background-color: var(--card-bg);
+		border: 1px solid var(--card-border);
+		margin-bottom: 1.5rem;
+		transition: border-color 0.2s ease, transform 0.2s ease;
+	}
+
+	.game-card:hover {
+		border-color: var(--accent);
+		transform: translateY(-2px);
+	}
+
+	.card-link {
+		display: grid;
+		grid-template-columns: 200px 1fr;
+		gap: 1.5rem;
+		padding: 1rem;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.visual-container {
+		width: 200px;
+		height: 120px;
+		border-radius: 4px;
+		overflow: hidden;
+		background-color: #000;
+		border: 1px solid var(--card-border);
+	}
+
+	.game-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.game-placeholder {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--text-dim);
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 0.5rem;
+	}
+
+	h3 {
+		margin: 0;
+		color: #ffffff;
+	}
+
+	.genre {
+		font-size: 0.75rem;
+		color: var(--text-dim);
+		font-style: italic;
+	}
+
+	p {
+		margin: 0 0 0.5rem 0;
+		color: var(--text-dim);
+		font-size: 0.95rem;
+	}
+
+	.read-more {
+		font-size: 0.8rem;
+		color: var(--accent);
+		font-weight: bold;
+	}
+
+	@media (max-width: 600px) {
+		.card-link {
+			grid-template-columns: 1fr;
+		}
+		.visual-container {
+			width: 100%;
+			height: 180px;
+		}
+	}
+</style>
