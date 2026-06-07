@@ -13,14 +13,14 @@ priority: 0
 
 ## Controlling The Chaos
 
-Conductor Chaos essentially boils down to "How well can you make decision under pressure?". I went all in on making the player feel urgency in every single action. I made picking up and dropping off passengers as satisfying as possible.
+Conductor Chaos essentially boils down to one question: "How well can you make decision under pressure?" I went all in on making the player feel a constant sense of urgency with every single action, while ensuring that the core mechanics of picking up and dropping of passengers remained as satisfying as possible. 
 
-## GMTK Experience
+## The GMTK Experience
 
-This was the first *GMTK* game jam I took part in. The shorter 4 days time period definitely lead me to cut some corners both visually and *definitely* code wise.
+This was the first *GMTK* game jam I participated in. The strict 4-day time limit definitely led me to cut some corners, both visually and *especially* under the hood in the codebase.
 
-The theme of the jam was "Loop" and I again went with a literal approach to this. The subway system is quite literally a loop that brings you back to the starting points **every single time**.
+The theme of the jam was "Loop", and I took a very literal approach to it. The subway system is quite literally a loop that brings you back to your starting point **every single time**.
 
 ## Creative Inspiration
 
-For this game I got my inspiration from my girlfriend who had a vague idea of a similar game from her childhood. As for visuals I mainly took inspiration from *Mini Metro* and general subway maps.
+The initial spark for this game came from my girlfriend, who recalled a vague idea of a similar game from her childhood. For the visual identity, I drew heavy inspiration from the clean, minimalist aesthetic of [Mini Metro](https://dinopoloclub.com/games/mini-metro/) and real-world subway maps.

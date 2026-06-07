@@ -13,18 +13,16 @@ priority: 3
 
 ## Dabbling With 3D
 
-ODD was my first game jam where I decided to do the visuals in 3D. Most of the assets that I used came from [KenneyNL](https://kenney.nl/) but I had to alter quite a lot of them to work with the visual style.
+ODD marked my first time tackling 3D visuals during a game jam. While I utilized assets from [KenneyNL](https://kenney.nl/) as a base, I heavily modified them to fit the specific, cohesive visual identity I was aiming for.
 
 ## The Eeriness
 
-I chose for a limited color palette to put extra emphasis on the eeriness of the game. The music, sound effects and "the voice" also all aid in that. My goal was to invoke a sort of *uneasy* feeling in the player, which seemed to work.
-
-All of this came to mind when I saw the theme "Strange Places".
+When the jam theme "Strange Places" was announced, I knew I wanted to evoke a sense of unease. I chose a highly limited color palette to emphasize the game's eerie atmosphere, supported heavily by the music, sound effects, and the mysterious *voice*. Based on player feedback, it successfully hit that unsettling mark.
 
 ## Game Feel & Polish
 
-For this game I went all in on improving game feel, because I felt like that was kind of lacking from my previous two releases. I feel like, especially with the typewriter text and the object selection I kind of hit that higher level of polish here.
+Having felt that my previous two releases were slightly lacking in game feel, I went all-in on polish for **ODD**. By focusing on satisfying micro-interactions, like the punchy object selection, and the rhythmic typewriter text, I was able to elevate the overall quality and achieve a much higher level of polish.
 
 ## Creative Inspiration
 
-My main, and mostly only inspiration for this game, were those books I had as a child of **Where's Wally?**.
+My primary, and almost exclusive inspiration for the core gameplay loop came from the **Where's Wally?** books I remember from back when I was a child.

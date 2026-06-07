@@ -13,15 +13,14 @@ priority: 1
 
 ## My First Game (Jam)
 
-Storm Guardians was my first ever game that was released to the public and also my first ever participation in a game jam.
+**Storm Guardians** holds a special place in my portfolio as my first-ever publicly released game, as well as my very first game jam entry.
 
-The theme of the jam was "calm before the storm" and I went with a literal approach, letting the player only interact with the game in between waves, *during an actual storm*.
+When the jam theme "Calm Before the Storm" was announced, I took a very literal approach. The player is completely locked out of building or modifying their defenses during the chaotic enemy waves (the *storm*). All interactions and preparations must happen in the brief periods between waves (the *calm*).
 
-## Gameplay Mechanics
+## Overcoming Obstacles
 
-- **Interest**: For every **100** Gold in your bank you get **1** extra gold per enemy eliminated.
-- **Calm Before The Storm**: The game only lets you build or upgrade towers in between rounds, forcing you to plan in advance.
+The biggest challenge during this jam was balancing the game's economy. Implementing the interest system meant that snowballing was a real risk, where players could become either overwhelmingly powerful or completely stuck. Iterating on this taught me how crucial rapid playtesting is to the design process.
 
 ## Creative Inspiration
 
-Inspired by titles like *Kingdom Rush* and *Bloons*, Storm Guardians focuses on the prep aspect, making you prepare each round deeply.
+Drawing inspiration from classic titles like [Kingdom Rush](https://www.kingdomrush.com/) and [Bloons TD](https://ninjakiwi.com/Games/Mobile/Bloons-TD-6.html), Storm Guardians heavily emphasizes the preparation phase, challenging players to strategize deeply before the next wave hits.
