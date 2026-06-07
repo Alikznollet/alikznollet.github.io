@@ -5,7 +5,7 @@ genres: ["Puzzle", "Atmospheric"]
 coverImage: "../../assets/odd.png"
 itchUrl: "https://alikz.itch.io/odd"
 gameJam:
-  name: "Brackeys Game Jam 2026.1"
+  name: "Brackeys 2026.1"
   placement: "#54"
   url: "https://itch.io/jam/brackeys-15/rate/4304736"
 priority: 3

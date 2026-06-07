@@ -36,33 +36,26 @@ const { Content } = await render(entry);
 					{entry.data.genres.map(genre => <Badge text={genre} />)}
 				</div>
 			</div>
-			{entry.data.gameJam && (
-				<div class="jam-info">
+			
+			<div class="actions-section">
+				{entry.data.gameJam && (
 					<a href={entry.data.gameJam.url} target="_blank" rel="noopener noreferrer" class="jam-card">
 						<span class="jam-label">{entry.data.gameJam.name || 'Game Jam Result'}</span>
 						<span class="jam-placement">{entry.data.gameJam.placement}</span>
 					</a>
+				)}
+				<div class="store-links">
+					{entry.data.itchUrl && <StoreCard url={entry.data.itchUrl} platform="itch" />}
+					{entry.data.steamUrl && <StoreCard url={entry.data.steamUrl} platform="steam" />}
 				</div>
-			)}
+			</div>
+
 			<p class="lead-desc">{entry.data.description}</p>
 		</header>
 
 		<div class="content-body">
 			<Content />
 		</div>
-
-		{(entry.data.itchUrl || entry.data.steamUrl) && (
-			<footer class="game-footer">
-				<hr class="separator" />
-				<div class="footer-content">
-					<h3>Available on</h3>
-					<div class="store-links">
-						{entry.data.itchUrl && <StoreCard url={entry.data.itchUrl} platform="itch" />}
-						{entry.data.steamUrl && <StoreCard url={entry.data.steamUrl} platform="steam" />}
-					</div>
-				</div>
-			</footer>
-		)}
 	</article>
 </Layout>
 
@@ -125,13 +118,31 @@ const { Content } = await render(entry);
 		flex-wrap: wrap;
 	}
 
-	.jam-info {
+	.actions-section {
+		display: flex;
+		gap: 1rem;
+		align-items: stretch;
 		margin-bottom: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.store-links {
+		display: flex;
+		gap: 1rem;
+		flex-grow: 1;
+		flex-wrap: nowrap;
+	}
+
+	@media (max-width: 800px) {
+		.store-links {
+			flex-wrap: wrap;
+		}
 	}
 
 	.jam-card {
 		display: inline-flex;
 		flex-direction: column;
+		justify-content: center;
 		background: var(--accent);
 		color: #000;
 		padding: 0.75rem 1.5rem;
@@ -141,6 +152,7 @@ const { Content } = await render(entry);
 		line-height: 1.2;
 		transition: transform 0.2s ease, box-shadow 0.2s ease;
 		box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+		min-width: 180px;
 	}
 
 	.jam-card:hover {
@@ -202,28 +214,6 @@ const { Content } = await render(entry);
 		border-radius: 8px;
 		border: 1px solid var(--card-border);
 		margin: 2rem 0;
-	}
-
-	.game-footer {
-		margin-top: 4rem;
-	}
-
-	.separator {
-		border: 0;
-		border-top: 1px solid var(--card-border);
-		margin-bottom: 3rem;
-	}
-
-	.footer-content h3 {
-		margin-top: 0;
-		margin-bottom: 1rem;
-		font-size: 1.5rem;
-	}
-
-	.store-links {
-		display: flex;
-		gap: 1rem;
-		flex-wrap: wrap;
 	}
 
 	@media (max-width: 600px) {
