@@ -32,30 +32,31 @@ const { Content } = await render(entry);
 					{entry.data.tags.map(tag => <Badge text={tag} />)}
 				</div>
 			</div>
-			<p class="lead-desc">{entry.data.description}</p>
-			
-			{entry.data.liveUrl && (
-				<div class="top-actions">
-					<a href={entry.data.liveUrl} target="_blank" rel="noopener noreferrer" class="live-demo-link">
-						View Live Demo →
+
+			<div class="actions-section">
+				{entry.data.githubUrl && <GitHubCard url={entry.data.githubUrl} />}
+				{entry.data.liveUrl && (
+					<a href={entry.data.liveUrl} target="_blank" rel="noopener noreferrer" class="live-demo-card">
+						<div class="icon-side">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="live-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+						</div>
+						<div class="info-side">
+							<span class="label">Live Prototype</span>
+							<span class="platform-name">View Demo</span>
+						</div>
+						<div class="arrow-side">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+						</div>
 					</a>
-				</div>
-			)}
+				)}
+			</div>
+
+			<p class="lead-desc">{entry.data.description}</p>
 		</header>
 
 		<div class="content-body">
 			<Content />
 		</div>
-
-		{(entry.data.githubUrl) && (
-			<footer class="project-footer">
-				<hr class="separator" />
-				<div class="footer-content">
-					<h3>Interested in the source?</h3>
-					<GitHubCard url={entry.data.githubUrl} />
-				</div>
-			</footer>
-		)}
 	</article>
 </Layout>
 
@@ -95,7 +96,7 @@ const { Content } = await render(entry);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
 		flex-wrap: wrap;
 		gap: 1rem;
 	}
@@ -111,71 +112,94 @@ const { Content } = await render(entry);
 		flex-wrap: wrap;
 	}
 
+	.actions-section {
+		display: flex;
+		gap: 1rem;
+		margin-bottom: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.live-demo-card {
+		display: flex;
+		align-items: center;
+		padding: 0.75rem 1.25rem;
+		background-color: #1a1a1a;
+		border: 1px solid var(--card-border);
+		border-radius: 12px;
+		text-decoration: none;
+		color: var(--text-color);
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+		max-width: 300px;
+		flex: 1 1 200px;
+	}
+
+	.live-demo-card:hover {
+		border-color: var(--accent);
+		background-color: #222;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+		text-decoration: none;
+	}
+
+	.icon-side {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		background-color: #252525;
+		border-radius: 10px;
+		margin-right: 1.25rem;
+		color: #ffffff;
+	}
+
+	.live-demo-card:hover .icon-side {
+		color: var(--accent);
+	}
+
+	.live-icon {
+		width: 20px;
+		height: 20px;
+	}
+
+	.info-side {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.label {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--text-dim);
+		font-weight: 600;
+		margin-bottom: 0.15rem;
+	}
+
+	.platform-name {
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: #ffffff;
+	}
+
+	.arrow-side {
+		color: var(--text-dim);
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+
+	.live-demo-card:hover .arrow-side {
+		transform: translate(2px, -2px);
+		color: var(--accent);
+	}
+
+	.arrow-icon {
+		width: 20px;
+		height: 20px;
+	}
+
 	.lead-desc {
 		font-size: 1.25rem;
 		color: var(--text-dim);
-		margin: 0 0 1rem 0;
+		margin: 0;
 	}
-
-	.top-actions {
-		margin-top: 1rem;
-	}
-
-	.live-demo-link {
-		display: inline-block;
-		font-weight: 600;
-		color: var(--accent);
-		font-size: 1rem;
-		text-decoration: underline;
-	}
-
-	.content-body {
-		font-size: 1.1rem;
-		color: var(--text-color);
-		line-height: 1.7;
-	}
-
-	/* Markdown styles */
-	.content-body :global(h2) {
-		font-size: 1.8rem;
-		margin-top: 3rem;
-		border-bottom: 1px solid var(--card-border);
-		padding-bottom: 0.5rem;
-	}
-
-	.content-body :global(p) {
-		margin-bottom: 1.5rem;
-	}
-
-	.content-body :global(img) {
-		max-width: 100%;
-		border-radius: 8px;
-		border: 1px solid var(--card-border);
-		margin: 2rem 0;
-	}
-
-	.project-footer {
-		margin-top: 4rem;
-	}
-
-	.separator {
-		border: 0;
-		border-top: 1px solid var(--card-border);
-		margin-bottom: 3rem;
-	}
-
-	.footer-content h3 {
-		margin-top: 0;
-		margin-bottom: 1.5rem;
-		font-size: 1.5rem;
-	}
-
-	@media (max-width: 600px) {
-		.meta h1 {
-			font-size: 2rem;
-		}
-		.visual-header {
-			height: 200px;
-		}
-	}
-</style>
