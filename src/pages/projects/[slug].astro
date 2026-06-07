@@ -96,8 +96,7 @@ const { Content } = await render(entry);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 1.5rem;
-		flex-wrap: wrap;
+		margin-bottom: 1rem;
 		gap: 1rem;
 	}
 
@@ -197,9 +196,57 @@ const { Content } = await render(entry);
 		width: 20px;
 		height: 20px;
 	}
-
 	.lead-desc {
 		font-size: 1.25rem;
 		color: var(--text-dim);
 		margin: 0;
 	}
+
+	.content-body {
+		font-size: 1.1rem;
+		color: var(--text-color);
+		line-height: 1.7;
+	}
+
+	/* Markdown styles */
+	.content-body :global(h2) {
+		font-size: 1.8rem;
+		margin-top: 3rem;
+		border-bottom: 1px solid var(--card-border);
+		padding-bottom: 0.5rem;
+	}
+
+	.content-body :global(p) {
+		margin-bottom: 1.5rem;
+	}
+
+	.content-body :global(ul) {
+		margin-bottom: 1.5rem;
+		padding-left: 1.5rem;
+	}
+
+	.content-body :global(li) {
+		margin-bottom: 0.5rem;
+	}
+
+	.content-body :global(img) {
+		max-width: 100%;
+		border-radius: 8px;
+		border: 1px solid var(--card-border);
+		margin: 2rem 0;
+	}
+
+	@media (max-width: 600px) {
+		.meta {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
+		.meta h1 {
+			font-size: 2rem;
+		}
+		.visual-header {
+			height: 200px;
+		}
+	}
+</style>

@@ -6,6 +6,8 @@ githubUrl: "https://github.com/Alikznollet/godot-spectre"
 priority: 0
 ---
 
-While looking for loggers that I could use in Godot during game development I could not find one that spoke to me. I did find some options that looked nice, but felt too *complicated* for what they are.
+## Existing Solutions
 
-That lead me to create my own logging utility that you can install and use instantly. It has some extra features that can be used to make debugging or reading logs easier, but it's generally **plug-and-play**.
+While looking for a reliable logging tool for my Godot projects, I couldn't find one that actually clicked with me. The options out there looked nice, but they felt needlessly complicated for what they were trying to achieve.
+
+That led me to create **Spectre Logger**. My main goal was to build a utility that you can install and use instantly. While it comes packed with extra features to make debugging and parsing logs easier, its core identity is simple: it's lightweight, multi-threaded and completely **plug-and-play**.
