@@ -1,20 +1,22 @@
 ---
+import { Image } from 'astro:assets';
+
 interface Props {
 	title: string;
 	description: string;
-	url?: string;
-	imageUrl?: string;
+	url: string;
+	coverImage?: any;
 	genre?: string;
 }
 
-const { title, description, url, imageUrl, genre } = Astro.props;
+const { title, description, url, coverImage, genre } = Astro.props;
 ---
 
 <div class="game-card">
 	<a href={url} class="card-link" aria-label={`View details for ${title}`}>
 		<div class="visual-container">
-			{imageUrl ? (
-				<img src={imageUrl} alt={title} class="game-image" />
+			{coverImage ? (
+				<Image src={coverImage} alt={title} class="game-image" />
 			) : (
 				<div class="game-placeholder">
 					<span>Gameplay Preview</span>

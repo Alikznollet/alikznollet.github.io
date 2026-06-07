@@ -1,0 +1,121 @@
+---
+interface Props {
+	url: string;
+	platform: 'itch' | 'steam';
+}
+
+const { url, platform } = Astro.props;
+
+const config = {
+	itch: {
+		label: 'Play on itch.io',
+		icon: `<svg viewBox="0 0 24 24" fill="currentColor" class="store-icon"><path d="M12.001 0c-6.626 0-12 5.373-12 12s5.374 12 12 12c6.626 0 12-5.373 12-12s-5.374-12-12-12zm-3.834 5.925c.145 0 .285.034.412.101.127.067.234.167.311.288l.81 1.258c.07.112.167.204.282.268.115.064.246.098.378.098h.084l.808-1.258a.747.747 0 0 1 .313-.288c.125-.067.266-.101.411-.101h.49c.146 0 .286.034.413.101.126.067.233.167.311.288l.808 1.258c.07.112.167.204.283.268.114.064.246.098.377.098h.085l.807-1.258c.079-.121.186-.221.312-.288a.742.742 0 0 1 .411-.101h.491c.145 0 .285.034.412.101.126.067.233.167.31.288l.81 1.258c.069.112.166.204.282.268.114.064.245.098.377.098h.085l.807-1.258c.078-.121.185-.221.312-.288a.741.741 0 0 1 .412-.101h.489c.145 0 .285.034.412.101.126.067.233.167.311.288l.81 1.258c.07.112.166.204.282.268.115.064.246.098.377.098h.084l.809-1.258a.748.748 0 0 1 .311-.288c.127-.067.267-.101.413-.101h.491c.21 0 .408.084.557.232.149.148.233.348.233.559v.49c0 .211-.084.411-.233.558a.784.784 0 0 1-.557.233h-.084l-.809 1.258a.748.748 0 0 1-.311.288.78.78 0 0 1-.413.101h-.491c-.146 0-.286-.034-.413-.101-.127-.067-.234-.167-.311-.288l-.809-1.258a.783.783 0 0 0-.282-.268c-.115-.064-.246-.098-.377-.098h-.084l-.81 1.258c-.078.121-.185.221-.311.288a.741.741 0 0 1-.412.101h-.489c-.146 0-.286-.034-.412-.101-.127-.067-.234-.167-.312-.288l-.81-1.258a.78.78 0 0 0-.282-.268c-.115-.064-.246-.098-.377-.098h-.085l-.81 1.258c-.077.121-.184.221-.31.288a.742.742 0 0 1-.412.101h-.491c-.145 0-.285-.034-.411-.101-.127-.067-.234-.167-.312-.288l-.807-1.258a.781.781 0 0 0-.283-.268c-.114-.064-.246-.098-.377-.098h-.085l-.808 1.258c-.078.121-.185.221-.311.288a.747_747 0 0 1-.413.101h-.49c-.145 0-.286-.034-.413-.101-.126-.067-.233-.167-.311-.288l-.808-1.258a.781.781 0 0 0-.282-.268.783.783 0 0 0-.378-.098h-.084l-.81 1.258c-.077.121-.184.221-.311.288a.747.747 0 0 1-.412.101h-.49c-.211 0-.411-.084-.559-.233a.783.783 0 0 1-.232-.558v-.49c0-.211.084-.411.232-.559a.787.787 0 0 1 .559-.232z"></path></svg>`,
+		color: '#fa5c5c',
+		bg: '#2a1a1a'
+	},
+	steam: {
+		label: 'Buy on Steam',
+		icon: `<svg viewBox="0 0 24 24" fill="currentColor" class="store-icon"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.361c-3.134 0-5.676-2.542-5.676-5.676 0-3.134 2.542-5.676 5.676-5.676 3.134 0 5.676 2.542 5.676 5.676 0 3.134-2.542 5.676-5.676 5.676zM12 9.009c-1.654 0-2.991 1.337-2.991 2.991s1.337 2.991 2.991 2.991 2.991-1.337 2.991-2.991-1.337-2.991-2.991-2.991z"></path></svg>`,
+		color: '#1b2838',
+		bg: '#1a1f2a'
+	}
+};
+
+const current = config[platform];
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer" class="store-card" style={`--accent-color: ${current.color}; --bg-color: ${current.bg};`}>
+	<div class="icon-side">
+		<Fragment set:html={current.icon} />
+	</div>
+	<div class="info-side">
+		<span class="label">{current.label}</span>
+		<span class="platform-name">{platform === 'itch' ? 'itch.io' : 'Steam'}</span>
+	</div>
+	<div class="arrow-side">
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+	</div>
+</a>
+
+<style>
+	.store-card {
+		display: flex;
+		align-items: center;
+		padding: 1rem 1.25rem;
+		background-color: var(--bg-color);
+		border: 1px solid var(--card-border);
+		border-radius: 12px;
+		text-decoration: none;
+		color: var(--text-color);
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+		margin: 1rem 0;
+		max-width: 350px;
+	}
+
+	.store-card:hover {
+		border-color: var(--accent-color);
+		filter: brightness(1.1);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+		text-decoration: none;
+	}
+
+	.icon-side {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		background-color: rgba(0, 0, 0, 0.2);
+		border-radius: 8px;
+		margin-right: 1rem;
+		color: #ffffff;
+	}
+
+	.store-icon {
+		width: 20px;
+		height: 20px;
+	}
+
+	.info-side {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.label {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--text-dim);
+		font-weight: 600;
+		margin-bottom: 0.1rem;
+	}
+
+	.platform-name {
+		font-size: 1rem;
+		font-weight: 700;
+		color: #ffffff;
+	}
+
+	.arrow-side {
+		color: var(--text-dim);
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+
+	.store-card:hover .arrow-side {
+		transform: translate(2px, -2px);
+		color: #ffffff;
+	}
+
+	.arrow-icon {
+		width: 18px;
+		height: 18px;
+	}
+
+	@media (max-width: 500px) {
+		.store-card {
+			max-width: 100%;
+		}
+	}
+</style>

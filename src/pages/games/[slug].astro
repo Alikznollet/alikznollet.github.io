@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+import StoreCard from '../../components/StoreCard.astro';
 
 export async function getStaticPaths() {
 	const gameEntries = await getCollection('games');
@@ -19,8 +21,8 @@ const { Content } = await render(entry);
 	<article class="game-detail">
 		<header>
 			<div class="visual-header">
-				{entry.data.imageUrl ? (
-					<img src={entry.data.imageUrl} alt={entry.data.title} class="hero-image" />
+				{entry.data.coverImage ? (
+					<Image src={entry.data.coverImage} alt={entry.data.title} class="hero-image" />
 				) : (
 					<div class="hero-placeholder">
 						<span>{entry.data.title}</span>
@@ -37,6 +39,19 @@ const { Content } = await render(entry);
 		<div class="content-body">
 			<Content />
 		</div>
+
+		{(entry.data.itchUrl || entry.data.steamUrl) && (
+			<footer class="game-footer">
+				<hr class="separator" />
+				<div class="footer-content">
+					<h3>Available on</h3>
+					<div class="store-links">
+						{entry.data.itchUrl && <StoreCard url={entry.data.itchUrl} platform="itch" />}
+						{entry.data.steamUrl && <StoreCard url={entry.data.steamUrl} platform="steam" />}
+					</div>
+				</div>
+			</footer>
+		)}
 	</article>
 </Layout>
 
@@ -115,6 +130,7 @@ const { Content } = await render(entry);
 	.content-body {
 		font-size: 1.1rem;
 		color: var(--text-color);
+		line-height: 1.7;
 	}
 
 	/* Markdown styles */
@@ -136,6 +152,35 @@ const { Content } = await render(entry);
 
 	.content-body :global(li) {
 		margin-bottom: 0.5rem;
+	}
+
+	.content-body :global(img) {
+		max-width: 100%;
+		border-radius: 8px;
+		border: 1px solid var(--card-border);
+		margin: 2rem 0;
+	}
+
+	.game-footer {
+		margin-top: 4rem;
+	}
+
+	.separator {
+		border: 0;
+		border-top: 1px solid var(--card-border);
+		margin-bottom: 3rem;
+	}
+
+	.footer-content h3 {
+		margin-top: 0;
+		margin-bottom: 1rem;
+		font-size: 1.5rem;
+	}
+
+	.store-links {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 	}
 
 	@media (max-width: 600px) {

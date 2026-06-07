@@ -8,6 +8,8 @@ socials:
     url: "https://x.com/alikznollet"
   - platform: "LinkedIn"
     url: "https://www.linkedin.com/in/alexander-nollet-97a944374/"
+  - platform: "Itch"
+    url: "https://alikz.itch.io/"
   - platform: "Email"
     url: "mailto:alexanderacj13@gmail.com"
 ---

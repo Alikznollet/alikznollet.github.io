@@ -22,6 +22,8 @@ const games = defineCollection({
 		description: z.string(),
 		genre: z.string().optional(),
 		coverImage: image().optional(),
+		itchUrl: z.string().optional(),
+		steamUrl: z.string().optional(),
 		pubDate: z.date().optional(),
 	}),
 });
