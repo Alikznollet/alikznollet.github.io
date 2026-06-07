@@ -10,22 +10,24 @@ const { title, description, url, tags = [] } = Astro.props;
 ---
 
 <div class="project-card">
-	<div class="content">
-		<h3>
-			{url ? <a href={url} target="_blank" rel="noopener noreferrer">{title}</a> : title}
-		</h3>
-		<p>{description}</p>
-		{tags.length > 0 && (
-			<div class="tags">
-				{tags.map(tag => <span class="tag">{tag}</span>)}
+	<a href={url} class="card-link" aria-label={`View details for ${title}`}>
+		<div class="content">
+			<h3>{title}</h3>
+			<p>{description}</p>
+			<div class="footer">
+				{tags.length > 0 && (
+					<div class="tags">
+						{tags.map(tag => <span class="tag">{tag}</span>)}
+					</div>
+				)}
+				<span class="view-details">View Details →</span>
 			</div>
-		)}
-	</div>
+		</div>
+	</a>
 </div>
 
 <style>
 	.project-card {
-		padding: 1.5rem;
 		border-radius: 8px;
 		background-color: var(--card-bg);
 		border: 1px solid var(--card-border);
@@ -38,15 +40,31 @@ const { title, description, url, tags = [] } = Astro.props;
 		transform: translateY(-2px);
 	}
 
+	.card-link {
+		display: block;
+		padding: 1.5rem;
+		text-decoration: none;
+		color: inherit;
+	}
+
 	h3 {
 		margin-top: 0;
 		margin-bottom: 0.5rem;
+		color: #ffffff;
 	}
 
 	p {
 		color: var(--text-dim);
-		margin-bottom: 1rem;
+		margin-bottom: 1.5rem;
 		font-size: 0.95rem;
+	}
+
+	.footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1rem;
 	}
 
 	.tags {
@@ -61,5 +79,11 @@ const { title, description, url, tags = [] } = Astro.props;
 		color: var(--accent);
 		padding: 0.2rem 0.5rem;
 		border-radius: 4px;
+	}
+
+	.view-details {
+		font-size: 0.8rem;
+		color: var(--accent);
+		font-weight: bold;
 	}
 </style>

@@ -4,70 +4,59 @@ import Layout from '../layouts/Layout.astro';
 import Profile from '../components/Profile.astro';
 import GameCard from '../components/GameCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import profileImage from '../assets/profile.jpg';
 
 const name = "Alex";
 const description = "Game Developer and Software Engineer. I build low-level systems, interactive tools, and immersive digital experiences.";
 
-// Fetch games from Content Collection
+// Fetch content from Collections
 const gameEntries = await getCollection('games');
+const projectEntries = await getCollection('projects');
 
-const projects = [
-	{
-		title: "Custom Voxel Renderer",
-		description: "A high-performance C++ voxel engine utilizing sparse octrees and compute shaders for real-time lighting.",
-		tags: ["C++", "OpenGL", "Graphics"],
-		url: "#"
-	},
-	{
-		title: "Procedural Terrain Generator",
-		description: "An Astro-based web tool for generating and exporting heightmaps using Simplex noise.",
-		tags: ["Astro", "TypeScript", "Algorithms"],
-		url: "#"
-	},
-	{
-		title: "AssetCrunch",
-		description: "A CLI tool for batch optimizing game assets (textures, models) for web deployment.",
-		tags: ["Tool", "CLI", "Node.js"],
-		url: "#"
-	},
-	{
-		title: "LogView",
-		description: "A lightweight terminal-based log visualizer for real-time debugging of networked games.",
-		tags: ["Tool", "Rust", "Terminal"],
-		url: "#"
-	},
-	{
-		title: "GridSnap",
-		description: "A simple library for implementing grid-based movement in any JavaScript engine.",
-		tags: ["Library", "JavaScript"],
-		url: "#"
-	}
-];
+// Sort by pubDate if available
+const sortedGames = gameEntries.sort((a, b) => 
+	(b.data.pubDate?.getTime() || 0) - (a.data.pubDate?.getTime() || 0)
+);
+const sortedProjects = projectEntries.sort((a, b) => 
+	(b.data.pubDate?.getTime() || 0) - (a.data.pubDate?.getTime() || 0)
+);
 ---
 
 <Layout title={`${name} | Portfolio`}>
 	<section>
-		<Profile name={name} description={description} />
+		<Profile name={name} description={description} imageUrl={profileImage} />
 	</section>
 
 	<section id="games">
 		<h2 class="section-title">Games</h2>
-		{gameEntries.map(game => (
-			<GameCard 
-				title={game.data.title}
-				description={game.data.description}
-				genre={game.data.genre}
-				imageUrl={game.data.imageUrl}
-				url={`/games/${game.id}`}
-			/>
-		))}
+		{sortedGames.length > 0 ? (
+			sortedGames.map(game => (
+				<GameCard 
+					title={game.data.title}
+					description={game.data.description}
+					genre={game.data.genre}
+					url={`/games/${game.id}`}
+				/>
+			))
+		) : (
+			<p class="empty-msg">No games found.</p>
+		)}
 	</section>
 
 	<section id="projects">
 		<h2 class="section-title">Projects & Tools</h2>
-		{projects.map(project => (
-			<ProjectCard {...project} />
-		))}
+		{sortedProjects.length > 0 ? (
+			sortedProjects.map(project => (
+				<ProjectCard 
+					title={project.data.title}
+					description={project.data.description}
+					tags={project.data.tags}
+					url={`/projects/${project.id}`}
+				/>
+			))
+		) : (
+			<p class="empty-msg">No projects found.</p>
+		)}
 	</section>
 
 	<footer>
@@ -83,5 +72,10 @@ const projects = [
 		color: var(--text-dim);
 		font-size: 0.9rem;
 		text-align: center;
+	}
+
+	.empty-msg {
+		color: var(--text-dim);
+		font-style: italic;
 	}
 </style>

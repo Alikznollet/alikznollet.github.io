@@ -1,0 +1,172 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const projectEntries = await getCollection('projects');
+	return projectEntries.map(entry => ({
+		params: { slug: entry.id }, props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={`${entry.data.title} | Project Details`}>
+	<a href="/" class="back-link">← Back to Home</a>
+	
+	<article class="project-detail">
+		<header>
+			{entry.data.coverImage && (
+				<div class="visual-header">
+					<Image src={entry.data.coverImage} alt={entry.data.title} class="hero-image" />
+				</div>
+			)}
+			<div class="meta">
+				<h1>{entry.data.title}</h1>
+				<div class="tags">
+					{entry.data.tags.map(tag => <span class="tag">{tag}</span>)}
+				</div>
+			</div>
+			<p class="lead-desc">{entry.data.description}</p>
+			
+			<div class="links">
+				{entry.data.githubUrl && <a href={entry.data.githubUrl} class="link-btn github">GitHub</a>}
+				{entry.data.liveUrl && <a href={entry.data.liveUrl} class="link-btn live">Live Demo</a>}
+			</div>
+		</header>
+
+		<div class="content-body">
+			<Content />
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.back-link {
+		display: inline-block;
+		margin-bottom: 2rem;
+		font-size: 0.9rem;
+		color: var(--text-dim);
+	}
+
+	.back-link:hover {
+		color: var(--accent);
+	}
+
+	.project-detail header {
+		margin-bottom: 3rem;
+	}
+
+	.visual-header {
+		width: 100%;
+		height: 300px;
+		background-color: #000;
+		border-radius: 12px;
+		overflow: hidden;
+		border: 1px solid var(--card-border);
+		margin-bottom: 2rem;
+	}
+
+	.hero-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.meta h1 {
+		margin: 0;
+		font-size: 3rem;
+	}
+
+	.tags {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.tag {
+		background-color: rgba(187, 134, 252, 0.1);
+		color: var(--accent);
+		padding: 0.2rem 0.6rem;
+		border-radius: 4px;
+		font-size: 0.8rem;
+	}
+
+	.lead-desc {
+		font-size: 1.25rem;
+		color: var(--text-dim);
+		margin: 0 0 1.5rem 0;
+	}
+
+	.links {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.link-btn {
+		padding: 0.5rem 1rem;
+		border-radius: 6px;
+		font-weight: bold;
+		font-size: 0.9rem;
+		transition: opacity 0.2s;
+	}
+
+	.link-btn:hover {
+		opacity: 0.8;
+		text-decoration: none;
+	}
+
+	.github {
+		background-color: #333;
+		color: #fff;
+	}
+
+	.live {
+		background-color: var(--accent);
+		color: var(--bg-color);
+	}
+
+	.content-body {
+		font-size: 1.1rem;
+		color: var(--text-color);
+	}
+
+	/* Markdown styles */
+	.content-body :global(h2) {
+		font-size: 1.8rem;
+		margin-top: 3rem;
+		border-bottom: 1px solid var(--card-border);
+		padding-bottom: 0.5rem;
+	}
+
+	.content-body :global(p) {
+		margin-bottom: 1.5rem;
+	}
+
+	.content-body :global(img) {
+		max-width: 100%;
+		border-radius: 8px;
+		border: 1px solid var(--card-border);
+	}
+
+	@media (max-width: 600px) {
+		.meta h1 {
+			font-size: 2rem;
+		}
+		.visual-header {
+			height: 200px;
+		}
+	}
+</style>
