@@ -6,6 +6,12 @@ githubUrl: "https://github.com/Alikznollet/godot-wisp"
 priority: 1
 ---
 
-Everyone in game development *dreads* git submodules. **Wisp** fixes that while staying true to the nature of Godot addons.
+## The Submodule Problem
 
-Since addons are committed to version control in a Godot project the only thing the tool needs to do is check for updates for those addons. If you're working in a team your peers don't even need to use the tool!
+Almost everyone in game development *dreads* dealing with git submodules. They are clunky, easy to break, and usually overkill when all you want to do is pull in a private plugin or a simple addon.
+
+## Frictionless Addons
+
+**Wisp** fixes this by staying true to how Godot handles addons naturally. Because addons are committed directly to your project's version control, Wisp's only job is to check for updates and pull them down when needed.
+
+It's completely *friction-free* for teams. If you use Wisp to manager your addons, your peers don't even need to install the tool. They just pull the latest commits from git like normal.
