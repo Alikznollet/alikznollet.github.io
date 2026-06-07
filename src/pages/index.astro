@@ -1,13 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Profile from '../components/Profile.astro';
 import GameCard from '../components/GameCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import profileImage from '../assets/profile.jpg';
 
-const name = "Alex";
-const description = "Game Developer and Software Engineer. I build low-level systems, interactive tools, and immersive digital experiences.";
+// Fetch profile data
+const profileEntry = await getEntry('profile', 'me');
+
+if (!profileEntry) {
+	throw new Error('Profile entry "me" not found in src/content/profile/me.md');
+}
+
+const { name, profileImage } = profileEntry.data;
+const { Content: ProfileContent } = await render(profileEntry);
 
 // Fetch content from Collections
 const gameEntries = await getCollection('games');
@@ -24,7 +30,9 @@ const sortedProjects = projectEntries.sort((a, b) =>
 
 <Layout title={`${name} | Portfolio`}>
 	<section>
-		<Profile name={name} description={description} imageUrl={profileImage} />
+		<Profile name={name} imageUrl={profileImage}>
+			<ProfileContent />
+		</Profile>
 	</section>
 
 	<section id="games">

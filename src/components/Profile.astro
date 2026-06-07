@@ -3,11 +3,10 @@ import { Image } from 'astro:assets';
 
 interface Props {
 	name: string;
-	description: string;
 	imageUrl?: any;
 }
 
-const { name, description, imageUrl } = Astro.props;
+const { name, imageUrl } = Astro.props;
 ---
 
 <div class="profile">
@@ -24,7 +23,9 @@ const { name, description, imageUrl } = Astro.props;
 	</div>
 	<div class="info">
 		<h1>{name}</h1>
-		<p class="description">{description}</p>
+		<div class="description">
+			<slot />
+		</div>
 	</div>
 </div>
 
@@ -71,7 +72,7 @@ const { name, description, imageUrl } = Astro.props;
 	}
 
 	.info h1 {
-		margin: 0 0 0.25rem 0;
+		margin: 0 0 0.5rem 0;
 		font-size: 3rem;
 		line-height: 1.1;
 	}
@@ -82,6 +83,24 @@ const { name, description, imageUrl } = Astro.props;
 		max-width: 550px;
 		margin: 0;
 		line-height: 1.5;
+	}
+
+	.description :global(p) {
+		margin-bottom: 0.75rem;
+	}
+
+	.description :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	.description :global(strong) {
+		color: #ffffff;
+		font-weight: 600;
+	}
+
+	.description :global(a) {
+		color: var(--accent);
+		text-decoration: underline;
 	}
 
 	@media (max-width: 600px) {
